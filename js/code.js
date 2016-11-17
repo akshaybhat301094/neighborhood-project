@@ -25,7 +25,7 @@ var locations = [
 
 ];
 
-
+//refrenced the code from the google map api class of udacity.
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat:32.923246, lng:75.127999},
@@ -58,10 +58,6 @@ function initMap() {
           infowindow.marker = marker;
         infowindow.setContent ('<h3>' + marker.title + '</h3>');
         infowindow.open(map,marker);
-        //this event closes the infowindow.
-        infowindow.addListener('closeclick', function () {
-          infowindow.setMarker(null);
-        });
        }
    }
    

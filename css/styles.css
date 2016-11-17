@@ -29,4 +29,21 @@ html, body {
 
 .searchbar {
 	margin-left: 20px;
+  text-align: center;
+}
+
+.search {
+  margin-top: 40px;
+}
+
+.listItems {
+  margin-top: 40px;
+}
+
+li {
+  list-style-type: none;
+  padding: 1em;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
 }

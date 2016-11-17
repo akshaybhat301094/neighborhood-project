@@ -10,12 +10,14 @@
 <body>
     <div class="container">
         <div class="col-xs-3 sidebar">
-            <h2>Udhampur Map</h2>
+            <h2>UDHAMPUR MAP</h2>
             <div class="search">
                 <p> Search: <input type="search" data-bind="value: searchBox, valueUpdate: 'keyup'" class="searchbar" placeholder="type here.."> </p>
+                <div class="listItems">
                 <ul data-bind="foreach: locationName">
                 <li data-bind="text: title"></li>
                 </ul>
+                </div>
             </div>
 
         </div>
