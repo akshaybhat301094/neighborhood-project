@@ -87,7 +87,10 @@ var ViewModel = function() {
     
    };
    self.searchBox.subscribe(self.search);
-
+        
+   self.select = function() {
+        console.log('you clicked');
+    }
 }
 
 ko.applyBindings(new ViewModel());

@@ -15,7 +15,7 @@
                 <p> Search: <input type="search" data-bind="value: searchBox, valueUpdate: 'keyup'" class="searchbar" placeholder="type here.."> </p>
                 <div class="listItems">
                 <ul data-bind="foreach: locationName">
-                <li data-bind="text: title"></li>
+                <li data-bind="text: title, click: $parent.select"></li>
                 </ul>
                 </div>
             </div>
