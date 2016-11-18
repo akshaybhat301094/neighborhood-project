@@ -6,6 +6,7 @@ var locations = [
     {
         title: 'My Home!', 
         location: {lat:32.923246, lng:75.127999}
+        
     },
     {   title: 'Devika',
         location: {lat:32.924933, lng:75.131099}
@@ -26,7 +27,7 @@ var locations = [
 ];
 
 //refrenced the code from the google map api class of udacity.
-function initMap() {
+initMap = function() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat:32.923246, lng:75.127999},
           zoom: 14
@@ -73,24 +74,33 @@ window.addEventListener('load',initMap);
 
 var ViewModel = function() {
    var self = this;
-   self.locationName = ko.observableArray(locations);
-   self.searchBox = ko.observable("");
+   this.locationName = ko.observableArray(locations);
+   this.searchBox = ko.observable("");
 //referenced this link on the udacity forums https://discussions.udacity.com/t/filtering-my-list-of-locations-with-ko/38858/4
 //and found another useful link http://opensoul.org/2011/06/23/live-search-with-knockoutjs/ which helped a lot.
-   self.search = function(value) {
+   this.search = function(value) {
         self.locationName([]);
         for(var x in locations) {
         if(locations[x].title.toLowerCase().indexOf(value.toLowerCase()) >= 0){
             self.locationName.push(locations[x]);
+            markers[x].setVisible(true);
         }
+        else markers[x].setVisible(false);
         }
     
    };
-   self.searchBox.subscribe(self.search);
-        
-   self.select = function() {
-        console.log('you clicked');
+   this.searchBox.subscribe(self.search);
+    
+
+   this.select = function() {
+        console.log('you clicked'); 
+            for(i = 0; i<locations.length; i++) { 
+              
+            google.maps.event.trigger(markers[i], 'click');} 
+            
+                         
     }
+
 }
 
 ko.applyBindings(new ViewModel());
