@@ -4,13 +4,13 @@ var markers = [];
 var holder = [];
 //created an array of all the details or the locations that we need to create on map.
 var locations = [
-    {   title: 'Jammu and Kashmir', 
+    {   title: 'Jammu', 
         location: {lat:33.7781750, lng:76.5761710}
     },
     {   title: 'Udhampur', 
         location: {lat:32.9159850, lng:75.1416170}   
     },
-    {   title: 'Himachal Pradesh',
+    {   title: 'Himachal',
         location: {lat:31.1048290, lng:77.1733900}
     },
     {   title: 'Chandigarh', 
@@ -19,7 +19,7 @@ var locations = [
     {   title: 'Haryana', 
         location: {lat:29.0587760, lng:76.0856010}
     },
-    {   title: 'New Delhi',
+    {   title: 'Delhi',
         location: {lat:28.6139390, lng:77.2090210}
     },
     {   title: 'Madhya Pradesh', 
@@ -41,7 +41,7 @@ var locations = [
 //refrenced the code from the google map api class of udacity.
 initMap = function() {
     map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat:32.923246, lng:75.127999},
+        center: {lat:22.9734230, lng:78.6568940},
           zoom: 14
     });
 
@@ -65,7 +65,28 @@ initMap = function() {
              bounce(this);
             showInfoWindow(this,informationWindow);
         });
+
+         var myurl= "http://api.wunderground.com/api/3b4f5103c2d331f2/conditions/q/CA/";
+        myurl += title
+        myurl += ".json";
+        console.log(myurl);
+
     } 
+
+    $.ajax({
+        url : myurl,
+        dataType : "jsonp",
+        success : function(parsed_json) {
+              var temp_string = parsed_json['current_observation']['temperature_string'];
+              var current_weather = parsed_json['current_observation']['weather'];
+              everything = "<ul>";
+              everything += "<li>Temperature: "+temp_string;
+              everything += "<li>Weather: "+current_weather;
+              everything += "</ul>";
+    }
+  });
+
+
 
     //this function keeps all the markers within a defined boundary so no matter what the screen size you can see all the markers.
     function createBounds() {
@@ -79,7 +100,7 @@ initMap = function() {
     function showInfoWindow(marker,infowindow) {
         if(infowindow.marker != marker) {
           infowindow.marker = marker;
-        infowindow.setContent ('<h3>' + marker.title + '</h3>' + '<h5> Location: ' + marker.position + '</h5>');
+        infowindow.setContent ('<h3>' + marker.title + '</h3>' + '<h5> Location: ' + marker.position + '</h5>' + everything);
         infowindow.open(map,marker);
        }
    }
