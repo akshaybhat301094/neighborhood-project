@@ -1,29 +1,41 @@
 var map;
 
 var markers = [];
-
+var holder = [];
+//created an array of all the details or the locations that we need to create on map.
 var locations = [
-    {
-        title: 'My Home!', 
-        location: {lat:32.923246, lng:75.127999}
-        
+    {   title: 'Jammu and Kashmir', 
+        location: {lat:33.7781750, lng:76.5761710}
     },
-    {   title: 'Devika',
-        location: {lat:32.924933, lng:75.131099}
+    {   title: 'Udhampur', 
+        location: {lat:32.9159850, lng:75.1416170}   
     },
-    {   title: 'Degree College', 
-        location: {lat:32.926401, lng:75.125585}
+    {   title: 'Himachal Pradesh',
+        location: {lat:31.1048290, lng:77.1733900}
     },
-    {   title: 'District Hospital', 
-        location: {lat:32.919926, lng:75.132827}
+    {   title: 'Chandigarh', 
+        location: {lat:30.7333150, lng:76.7794180}
     },
-    {   title: 'Army Public School',
-        location: {lat:32.920907, lng:75.114759}
+    {   title: 'Haryana', 
+        location: {lat:29.0587760, lng:76.0856010}
     },
-    {   title: 'Railway Station', 
-        location: {lat:32.925951, lng:75.154005}
+    {   title: 'New Delhi',
+        location: {lat:28.6139390, lng:77.2090210}
+    },
+    {   title: 'Madhya Pradesh', 
+        location: {lat:22.9734230, lng:78.6568940}
+    },
+    {   title: 'Gujrat', 
+        location: {lat:22.2586520, lng:71.1923810}
+    },
+    {   title: 'Bengaluru', 
+        location: {lat:12.9715990, lng:77.5945630}
+    },
+    {   title: 'Mysore', 
+        location: {lat:12.2958100, lng:76.6393810}
     }
-
+    
+    
 ];
 
 //refrenced the code from the google map api class of udacity.
@@ -53,11 +65,21 @@ initMap = function() {
              bounce(this);
             showInfoWindow(this,informationWindow);
         });
-    }
-       function showInfoWindow(marker,infowindow) {
+    } 
+
+    //this function keeps all the markers within a defined boundary so no matter what the screen size you can see all the markers.
+    function createBounds() {
+        var bounds = new google.maps.LatLngBounds();
+        for (var i = 0; i < markers.length; i++) {
+            bounds.extend(markers[i].position);
+        }
+            map.fitBounds(bounds);
+    } createBounds();
+
+    function showInfoWindow(marker,infowindow) {
         if(infowindow.marker != marker) {
           infowindow.marker = marker;
-        infowindow.setContent ('<h3>' + marker.title + '</h3>');
+        infowindow.setContent ('<h3>' + marker.title + '</h3>' + '<h5> Location: ' + marker.position + '</h5>');
         infowindow.open(map,marker);
        }
    }
@@ -69,13 +91,14 @@ initMap = function() {
         },1400);
    }
    
-}
+};
 window.addEventListener('load',initMap);
 
 var ViewModel = function() {
    var self = this;
    this.locationName = ko.observableArray(locations);
    this.searchBox = ko.observable("");
+   this.markerItem = ko.observableArray(markers);
 //referenced this link on the udacity forums https://discussions.udacity.com/t/filtering-my-list-of-locations-with-ko/38858/4
 //and found another useful link http://opensoul.org/2011/06/23/live-search-with-knockoutjs/ which helped a lot.
    this.search = function(value) {
@@ -92,15 +115,19 @@ var ViewModel = function() {
    this.searchBox.subscribe(self.search);
     
 
-   this.select = function() {
-        console.log('you clicked'); 
-            for(i = 0; i<locations.length; i++) { 
+   self.select = function() {
+        console.log(this);
+                
+                for(i = 0; i < locations.length; i++) {
+                        holder.push(locations[i].title);
+            }
+                current = holder.indexOf(this.title);
+                google.maps.event.trigger(markers[current], 'click');
               
-            google.maps.event.trigger(markers[i], 'click');} 
-            
+         };
                          
-    }
+    
 
-}
+};
 
 ko.applyBindings(new ViewModel());
