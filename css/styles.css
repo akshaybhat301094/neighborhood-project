@@ -7,33 +7,40 @@ html, body {
 
 #map {
         height: 100%;
-        width: 100%;
+        
       }
 
 .map-container {
   height: 100vh;
   padding: 0;
+  width: 70%;
+  
 }
 
 .container {
 	width: 100%;
 	padding: 0;
+  height: 100%;
 }
 
 .sidebar {
 	background: #ddd;
-	height:100vh;
-	width: 25%;
+	width: 30%;
 	border-right: groove black 1px;
+  height: 100%;
 }
 
 .searchbar {
-	margin-left: 20px;
   text-align: center;
+  width: 100%;
 }
 
 .search {
   margin-top: 40px;
+}
+
+.search ul {
+  padding-left: 0;
 }
 
 .listItems {
@@ -47,3 +54,17 @@ li {
   font-size: 15px;
   font-weight: bold;
 }
+
+/*mobiles*/
+@media screen and (max-width: 480px) {
+  
+  li {
+    font-size: 11px;
+  }
+  h2 {
+    font-size: 15px;
+    font-weight: bolder;
+  }
+  
+}
+

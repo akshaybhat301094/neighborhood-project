@@ -131,3 +131,8 @@ var ViewModel = function() {
 };
 
 ko.applyBindings(new ViewModel());
+
+window.onerror = function() {
+  alert('failed to load google check your connection');
+  
+}

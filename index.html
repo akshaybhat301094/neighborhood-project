@@ -8,12 +8,11 @@
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div class="container">
-    <a class="burger-nav"></a>
+    <div class="col-xs-12 container">
         <div class="col-xs-3 sidebar">
             <h2>MAP INDIA</h2>
             <div class="search">
-                <p> Search: <input type="search" data-bind="value: searchBox, valueUpdate: 'keyup'" class="searchbar" placeholder="type here.."> </p>
+                <input type="search" data-bind="value: searchBox, valueUpdate: 'keyup'" class="searchbar" placeholder="type here..">
                 <div class="listItems">
                 <ul data-bind="foreach: locationName">
                 <li data-bind="text: title, click: $parent.select"></li>
@@ -31,7 +30,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/knockout.js"></script>
 <script src="js/code.js"></script>
-<script src=
+<script async defer src=
         "https://maps.googleapis.com/maps/api/js?key=AIzaSyANkNsewGyHfamVwPlj5MPW_InmaaoE2WU">
     </script>
     
