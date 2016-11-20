@@ -51,7 +51,7 @@ li {
   list-style-type: none;
   padding: 1em;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: bold;
 }
 
@@ -59,7 +59,7 @@ li {
 @media screen and (max-width: 480px) {
   
   li {
-    font-size: 11px;
+    font-size: 10px;
   }
   h2 {
     font-size: 15px;
