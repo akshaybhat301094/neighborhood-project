@@ -148,7 +148,7 @@ initMap = function() {
             infowindow.open(map, marker);
         }
     }
-
+    //this function makes the markers to bounce upon click.
     function bounce(marker) {
         marker.setAnimation(google.maps.Animation.BOUNCE);
         window.setTimeout(function() {
@@ -178,7 +178,7 @@ var ViewModel = function() {
     };
     this.searchBox.subscribe(self.search);
 
-
+//makes the markers to bounce when the list view is clicked
     self.select = function() {
         console.log(this);
 
